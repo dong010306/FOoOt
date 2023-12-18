@@ -88,6 +88,7 @@ class FastestSnatch(QWidget):
         time.sleep(2)
         # 间隔停滞
         time.sleep(round(random.uniform(1, 2), 2))
+        print('寻找二维码！')
         # 获取并保存二维码截图
         qrcode_img_data = browser.find_element(By.XPATH, '//*[@id="login"]/div[2]/div/div[1]/div[1]').screenshot_as_png
         qrcode_img = Image.open(BytesIO(qrcode_img_data))
