@@ -30,8 +30,10 @@ class FOoOtWindow(Ui_FOoOt, QMainWindow):
         # 最速抢夺
         self.fastestSnatch = FastestSnatch(1, 30)
         # 抢夺触发按钮回调
-        # self.startButton.clicked.connect(self.fastestSnatch.jobStart)
+        self.startButton.clicked.connect(self.fastestSnatch.jobStart)
+        self.stopButton.clicked.connect(self.fastestSnatch.jobPause)
         self.initButton.clicked.connect(self.initUser)
+        self.fastestSnatch.loginSignal.connect(self.initUser)
         # 启动二维码窗口
         self.fastestSnatch.qrcodeSignal.connect(self.qrcodeDialogShow)
         # 弹出的二维码窗口
@@ -69,6 +71,7 @@ class FOoOtWindow(Ui_FOoOt, QMainWindow):
         # 关闭
         elif message['operation'] == 'close':
             self.initButton.setText(message['username'])
+            self.qrcodeDialog.verticalLayout.itemAt(0).widget().deleteLater()
             self.qrcodeDialog.close()
 
     def closeEvent(self, a0: typing.Optional[QtGui.QCloseEvent]) -> None:
