@@ -1,0 +1,13 @@
+prefix=e:/pyqt/FOoOt/.conda/Library
+exec_prefix=e:/pyqt/FOoOt/.conda/Library
+libdir=e:/pyqt/FOoOt/.conda/Library/lib
+sharedlibdir=e:/pyqt/FOoOt/.conda/Library/lib
+includedir=e:/pyqt/FOoOt/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
