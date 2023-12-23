@@ -14,28 +14,32 @@
    <string>FOoOt</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,12">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,12">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="requestComboBox">
         <property name="sizeAdjustPolicy">
          <enum>QComboBox::AdjustToContents</enum>
         </property>
         <item>
          <property name="text">
-          <string>单次请求</string>
+          <string>连续请求</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>连续请求</string>
+          <string>单次请求</string>
          </property>
         </item>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="placeholderText">
+         <string>请输入网址</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="startButton">
@@ -51,16 +55,28 @@
         </property>
        </widget>
       </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
-       <widget class="QPushButton" name="initButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>初始化用户</string>
+         <string>XPath选择</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="placeholderText">
+         <string>请输入商品元素XPath</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="checkButton">
+        <property name="text">
+         <string>检查元素</string>
         </property>
        </widget>
       </item>
@@ -76,16 +92,26 @@
        </widget>
       </item>
       <item>
-       <widget class="QDateEdit" name="dateEdit">
+       <widget class="QDateTimeEdit" name="startDateTimeEdit">
+        <property name="displayFormat">
+         <string>yyyy/MM/dd HH:mm</string>
+        </property>
         <property name="calendarPopup">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QTimeEdit" name="timeEdit">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>结束时间</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateTimeEdit" name="endDateTimeEdit">
         <property name="displayFormat">
-         <string>HH:mm:ss</string>
+         <string>yyyy/MM/dd HH:mm:ss</string>
         </property>
         <property name="calendarPopup">
          <bool>true</bool>
@@ -119,17 +145,12 @@
         </property>
         <item>
          <property name="text">
-          <string>1ms</string>
+          <string>1s</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>5ms</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>10ms</string>
+          <string>500ms</string>
          </property>
         </item>
         <item>
@@ -139,7 +160,17 @@
         </item>
         <item>
          <property name="text">
-          <string>1s</string>
+          <string>10ms</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>5ms</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1ms</string>
          </property>
         </item>
        </widget>
@@ -151,154 +182,14 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="paramsEdit">
          <attribute name="title">
           <string>params</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="0">
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>730</width>
-               <height>400</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout">
-              <item>
-               <widget class="QToolBox" name="paramsBox">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="contextMenuPolicy">
-                 <enum>Qt::DefaultContextMenu</enum>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
-                </property>
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <property name="tabSpacing">
-                 <number>6</number>
-                </property>
-                <widget class="QWidget" name="Param_page_1">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>712</width>
-                   <height>330</height>
-                  </rect>
-                 </property>
-                 <attribute name="label">
-                  <string>Params_1</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_5">
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,2,0,4">
-                    <property name="spacing">
-                     <number>6</number>
-                    </property>
-                    <property name="sizeConstraint">
-                     <enum>QLayout::SetDefaultConstraint</enum>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_5">
-                      <property name="contextMenuPolicy">
-                       <enum>Qt::DefaultContextMenu</enum>
-                      </property>
-                      <property name="text">
-                       <string>name</string>
-                      </property>
-                      <property name="scaledContents">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_2"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_6">
-                      <property name="text">
-                       <string>content</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_3"/>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="Param_page_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>712</width>
-                   <height>330</height>
-                  </rect>
-                 </property>
-                 <attribute name="label">
-                  <string>Params_2</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_4">
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,2,0,4">
-                    <item>
-                     <widget class="QLabel" name="label_7">
-                      <property name="contextMenuPolicy">
-                       <enum>Qt::DefaultContextMenu</enum>
-                      </property>
-                      <property name="text">
-                       <string>name</string>
-                      </property>
-                      <property name="scaledContents">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_4"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_8">
-                      <property name="text">
-                       <string>content</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_5"/>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-          <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QLabel" name="label_3">
@@ -336,130 +227,28 @@
             </item>
            </layout>
           </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <column>
+             <property name="text">
+              <string>name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>params</string>
+             </property>
+            </column>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="bodyEdit">
          <attribute name="title">
           <string>body</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="1" column="0">
-           <widget class="QScrollArea" name="scrollArea_2">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>730</width>
-               <height>400</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <widget class="QToolBox" name="bodysBox">
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="Body_page_1">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>712</width>
-                   <height>330</height>
-                  </rect>
-                 </property>
-                 <attribute name="label">
-                  <string>Bodys_1</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_6">
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,2,0,4">
-                    <item>
-                     <widget class="QLabel" name="label_9">
-                      <property name="contextMenuPolicy">
-                       <enum>Qt::DefaultContextMenu</enum>
-                      </property>
-                      <property name="text">
-                       <string>name</string>
-                      </property>
-                      <property name="scaledContents">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_6"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_10">
-                      <property name="text">
-                       <string>content</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_7"/>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="Body_page_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>712</width>
-                   <height>330</height>
-                  </rect>
-                 </property>
-                 <attribute name="label">
-                  <string>Bodys_2</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_7">
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,2,0,4">
-                    <item>
-                     <widget class="QLabel" name="label_11">
-                      <property name="contextMenuPolicy">
-                       <enum>Qt::DefaultContextMenu</enum>
-                      </property>
-                      <property name="text">
-                       <string>name</string>
-                      </property>
-                      <property name="scaledContents">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_8"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_12">
-                      <property name="text">
-                       <string>content</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEdit_9"/>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-          <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QLabel" name="label_4">
@@ -496,6 +285,57 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="headersEdit">
+         <attribute name="title">
+          <string>headers</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>headers Settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="AddParamToolButton_3">
+              <property name="text">
+               <string>ADD</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="DelParamToolButton_3">
+              <property name="text">
+               <string>DEL</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget_3"/>
           </item>
          </layout>
         </widget>
@@ -555,12 +395,12 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
    <property name="text">
-    <string>新建</string>
+    <string>新建脚本</string>
    </property>
   </action>
   <action name="actionOpen">
    <property name="text">
-    <string>打开</string>
+    <string>打开脚本</string>
    </property>
   </action>
   <action name="actionSettings">

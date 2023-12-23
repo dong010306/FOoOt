@@ -15,7 +15,7 @@ import threading
 import typing
 
 from PyQt5 import QtGui
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QTextCursor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QLabel
 
 from FOoOt import Ui_FOoOt
@@ -29,54 +29,57 @@ class FOoOtWindow(Ui_FOoOt, QMainWindow):
         # 初始化UI
         self.setupUi(self)
         # 最速抢夺
-        self.fastestSnatch = FastestSnatch(1, 30)
+        self.fastestSnatch = FastestSnatch()
+        # 控制台信号触发
+        self.fastestSnatch.resultSignal.connect(self.refreshConsole)
+        # 所有参数
+        self.settings = {'requestMethod': None, 'url': None, 'interval': 0.0, 'startTime': None, 'endTime': None,
+                         'XPath': None, 'params': {}, 'body': {}, 'headers': {}}
         # 抢夺触发按钮回调
-        self.startButton.clicked.connect(self.fastestSnatch.jobStart)
-        self.stopButton.clicked.connect(self.fastestSnatch.jobPause)
-        self.initButton.clicked.connect(self.initUser)
-        self.fastestSnatch.loginSignal.connect(self.initUser)
-        # 启动二维码窗口
-        self.fastestSnatch.qrcodeSignal.connect(self.qrcodeDialogShow)
-        # 弹出的二维码窗口
-        self.qrcodeDialog = QrcodeDialog()
+        # 启动
+        self.startButton.clicked.connect(self.start)
+        # 停止
+        self.stopButton.clicked.connect(self.stop)
 
-    def initUser(self):
-        # 设置厨师按钮不可用
-        self.initButton.setDisabled(True)
-        # 启动初始化线程
-        getCookiesThread = threading.Thread(target=self.fastestSnatch.getCookies)
-        # 设置守护线程
-        getCookiesThread.daemon = True
-        # 启动线程
-        getCookiesThread.start()
+    def getSettings(self):
+        tempInterval = self.intervalTime.currentText()
+        if tempInterval == '1ms':
+            self.settings['interval'] = 0.001
+        elif tempInterval == '5ms':
+            self.settings['interval'] = 0.005
+        elif tempInterval == '10ms':
+            self.settings['interval'] = 0.01
+        elif tempInterval == '100ms':
+            self.settings['interval'] = 0.1
+        elif tempInterval == '500ms':
+            self.settings['interval'] = 0.5
+        elif tempInterval == '1s':
+            self.settings['interval'] = 1
 
-    def qrcodeDialogShow(self, message):
-        """
-        二维码启动函数
-        :param message:
-        :return:
-        """
-        # 区分操作，信号控制，打开
-        if message['operation'] == 'open':
-            # 获取二维码图片地址
-            image_path = message['path']
-            url_father = os.path.dirname(os.path.abspath(__file__))
-            image_path = url_father + image_path
-            # 加载图片
-            labelPix = QLabel("show", self.qrcodeDialog)
-            pic = QPixmap(image_path)
-            labelPix.setPixmap(pic)
-            # 打开对话框
-            self.qrcodeDialog.verticalLayout.addWidget(labelPix)
-            self.qrcodeDialog.show()
-        # 关闭
-        elif message['operation'] == 'close':
-            self.initButton.setText(message['username'])
-            self.qrcodeDialog.verticalLayout.itemAt(0).widget().deleteLater()
-            self.qrcodeDialog.close()
+    def refreshConsole(self, content):
+        # 插入控制台
+        self.plainTextEdit.insertPlainText(content + '\n')
+        # 滚动条移动到最下方
+        self.plainTextEdit.moveCursor(QTextCursor.End)
+
+    def start(self):
+        # 获取所有设置
+        self.getSettings()
+        # 加载所有设置
+        self.fastestSnatch.updateSettings(self.settings)
+        # 清空控制台
+        self.plainTextEdit.clear()
+        # 启动定时器
+        self.fastestSnatch.jobStart()
+
+    def stop(self):
+        # 停止定时器
+        self.fastestSnatch.jobPause()
 
     def closeEvent(self, a0: typing.Optional[QtGui.QCloseEvent]) -> None:
-        self.qrcodeDialog.close()
+        # 停止定时器
+        self.stop()
+        # 退出程序
         sys.exit()
 
 
