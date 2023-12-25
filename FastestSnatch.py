@@ -61,7 +61,9 @@ class FastestSnatch(QWidget):
         self.interval = settings['interval']
         # 请求头合并
         self.headers.update(settings['headers'])
+        # 更新params参数
         self.params.update(settings['params'])
+        # 更新请求body参数
         self.body.update(settings['body'])
         # XPath元素
         # self.XPath = settings['XPath']
@@ -74,6 +76,13 @@ class FastestSnatch(QWidget):
         # url
         self.url = settings['url']
 
+    def submitOrder(self):
+        """
+        订单生成函数
+        :return:
+        """
+        pass
+
     def snatchStart(self):
         """
         抢购请求函数
@@ -81,9 +90,11 @@ class FastestSnatch(QWidget):
         """
         try:
             print(self.XPath)
+            # 发送控制台结果
             self.resultSignal.emit(self.XPath)
         except Exception as e:
             print(str(e))
+            # 输出控制台报错
             self.resultSignal.emit(str(e))
         finally:
             pass

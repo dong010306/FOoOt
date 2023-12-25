@@ -15,7 +15,10 @@ import threading
 import typing
 
 from PyQt5 import QtGui
+from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QPixmap, QTextCursor
+from PyQt5.QtWebEngineCore import QWebEngineHttpRequest
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QLabel
 
 from FOoOt import Ui_FOoOt
@@ -32,6 +35,8 @@ class FOoOtWindow(Ui_FOoOt, QMainWindow):
         self.fastestSnatch = FastestSnatch()
         # 控制台信号触发
         self.fastestSnatch.resultSignal.connect(self.refreshConsole)
+        # 检查元素
+        self.checkButton.clicked.connect(self.checkElement)
         # 所有参数
         self.settings = {'requestMethod': None, 'url': None, 'interval': 0.0, 'startTime': None, 'endTime': None,
                          'XPath': None, 'params': {}, 'body': {}, 'headers': {}}
@@ -40,6 +45,16 @@ class FOoOtWindow(Ui_FOoOt, QMainWindow):
         self.startButton.clicked.connect(self.start)
         # 停止
         self.stopButton.clicked.connect(self.stop)
+
+        # 浏览器页面
+        self.browser = QWebEngineView()
+        # 添加窗口
+        self.internetLayout.addWidget(self.browser)
+
+    def checkElement(self):
+        self.fastestSnatch.url = self.urlEdit.text()
+        # 加载外部的web界面
+        self.browser.load(QUrl(self.fastestSnatch.url))
 
     def getSettings(self):
         tempInterval = self.intervalTime.currentText()

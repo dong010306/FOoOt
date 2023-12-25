@@ -35,7 +35,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="urlEdit">
         <property name="placeholderText">
          <string>请输入网址</string>
         </property>
@@ -83,7 +83,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,0,0">
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
@@ -93,8 +93,23 @@
       </item>
       <item>
        <widget class="QDateTimeEdit" name="startDateTimeEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>144</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
+        </property>
         <property name="displayFormat">
-         <string>yyyy/MM/dd HH:mm</string>
+         <string>yyyy/MM/dd HH:mm:ss</string>
         </property>
         <property name="calendarPopup">
          <bool>true</bool>
@@ -110,6 +125,18 @@
       </item>
       <item>
        <widget class="QDateTimeEdit" name="endDateTimeEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>144</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="displayFormat">
          <string>yyyy/MM/dd HH:mm:ss</string>
         </property>
@@ -182,7 +209,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="paramsEdit">
          <attribute name="title">
@@ -346,6 +373,16 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <widget class="QPlainTextEdit" name="plainTextEdit"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="internetTab">
+         <attribute name="title">
+          <string>internet</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="internetLayout"/>
           </item>
          </layout>
         </widget>
